@@ -7,7 +7,6 @@ import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeab
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 contract MyERC20 is Initializable, UUPSUpgradeable, OwnableUpgradeable, ERC20Upgradeable {
-
     uint256 public counter;
     uint256[49] __gap;
 
@@ -16,7 +15,7 @@ contract MyERC20 is Initializable, UUPSUpgradeable, OwnableUpgradeable, ERC20Upg
         _disableInitializers();
     }
 
-    function initialize() initializer public {
+    function initialize() public initializer {
         __Ownable_init(msg.sender);
         __ERC20_init("UpgradableSmartContract", "USC");
     }

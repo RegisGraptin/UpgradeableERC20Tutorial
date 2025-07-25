@@ -15,11 +15,7 @@ contract MyERC20Test is Test {
     function setUp() public {
         // Deploy our MyERC20 v1
         vm.prank(owner);
-        proxyAddress = Upgrades.deployTransparentProxy(
-            "MyERC20.sol",
-            owner,
-            abi.encodeCall(MyERC20.initialize, ())
-        );
+        proxyAddress = Upgrades.deployTransparentProxy("MyERC20.sol", owner, abi.encodeCall(MyERC20.initialize, ()));
     }
 
     function testDeployment() public view {
@@ -34,11 +30,7 @@ contract MyERC20Test is Test {
         vm.prank(user);
         proxy.increase();
 
-        assertEq(
-            proxy.counter(),
-            1,
-            "Counter does not have the expected value"
-        );
+        assertEq(proxy.counter(), 1, "Counter does not have the expected value");
     }
 
     function testUpgradeContract() public {
@@ -59,11 +51,7 @@ contract MyERC20Test is Test {
         // Call our new 'increase' function
         vm.prank(user);
         proxyV2.increase(); // Increase by 2
-        assertEq(
-            proxyV2.counter(),
-            beforeCounterValue + 2,
-            "Counter does not have the expected value"
-        );
+        assertEq(proxyV2.counter(), beforeCounterValue + 2, "Counter does not have the expected value");
         assertEq(proxyV2.lastUser(), user, "Last user does not match");
     }
 }

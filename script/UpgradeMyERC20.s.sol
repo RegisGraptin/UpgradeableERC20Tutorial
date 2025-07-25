@@ -7,7 +7,6 @@ import {Script, console} from "forge-std/Script.sol";
 import {MyERC20v2} from "../src/MyERC20v2.sol";
 
 contract UpgradeMyERC20Script is Script {
-
     function setUp() public {}
 
     function run() public {
@@ -15,9 +14,9 @@ contract UpgradeMyERC20Script is Script {
         address proxyAddress = vm.envAddress("PROXY_ADDRESS");
 
         vm.startBroadcast(privateKey);
-        
+
         Upgrades.upgradeProxy(proxyAddress, "MyERC20v2.sol", "");
-        
+
         vm.stopBroadcast();
     }
 }
